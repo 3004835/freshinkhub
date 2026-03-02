@@ -2,6 +2,9 @@
 async function loadBlogPosts() {
     try {
         const response = await fetch('/data/blog-posts.json');
+        if (!response.ok) {
+            throw new Error('Failed to load blog posts');
+        }
         const data = await response.json();
         return data.posts;
     } catch (error) {
@@ -13,11 +16,11 @@ async function loadBlogPosts() {
 function renderPostPreview(post) {
     return `
         <article class="blog-card">
-            <img src="${post.featuredImage || '/images/placeholder.jpg'}" alt="${post.title}" class="blog-card-image" loading="lazy">
+            <img src="${post.featuredImage || '/images/placeholder.jpg'}" alt="${post.title}" class="blog-card-image" loading="lazy" onerror="this.src='/images/placeholder.jpg'">
             <div class="blog-card-content">
-                <h3><a href="/blog-post.html?id=${post.slug}" style="text-decoration: none; color: inherit;">${post.title}</a></h3>
+                <h3><a href="/blog-post.html?id=${post.slug}">${post.title}</a></h3>
                 <div class="blog-card-meta">
-                    <span>${post.date}</span> · <span>${post.readingTime}</span>
+                    <span>${post.date}</span> · <span>${post.readingTime || '5 min read'}</span>
                 </div>
                 <p class="blog-card-excerpt">${post.excerpt}</p>
                 <a href="/blog-post.html?id=${post.slug}" class="read-more">Read article →</a>
@@ -32,6 +35,11 @@ async function displayFeaturedPosts() {
     if (!featuredContainer) return;
     
     const featured = posts.filter(post => post.featured).slice(0, 3);
+    if (featured.length === 0) {
+        featuredContainer.innerHTML = '<p style="text-align: center; color: var(--dark-gray);">No featured posts available.</p>';
+        return;
+    }
+    
     featuredContainer.innerHTML = featured.map(renderPostPreview).join('');
 }
 
@@ -39,6 +47,11 @@ async function displayAllPosts() {
     const posts = await loadBlogPosts();
     const allPostsContainer = document.getElementById('all-posts');
     if (!allPostsContainer) return;
+    
+    if (posts.length === 0) {
+        allPostsContainer.innerHTML = '<p style="text-align: center; color: var(--dark-gray);">No posts available.</p>';
+        return;
+    }
     
     allPostsContainer.innerHTML = posts.map(renderPostPreview).join('');
 }
@@ -57,47 +70,59 @@ async function displaySinglePost() {
     
     if (!post) {
         document.getElementById('post-heading').textContent = 'Post not found';
+        document.getElementById('post-body').innerHTML = '<p>The article you\'re looking for doesn\'t exist or has been moved.</p>';
         return;
     }
     
     // Update meta tags
-    document.getElementById('post-title').textContent = `${post.title} - FreshInkHub`;
-    document.getElementById('meta-description').setAttribute('content', post.excerpt);
+    document.title = `${post.title} - FreshInkHub`;
+    document.querySelector('meta[name="description"]').setAttribute('content', post.excerpt);
     
     // Update header
     document.getElementById('post-heading').textContent = post.title;
-    document.getElementById('post-author').textContent = post.author;
+    document.getElementById('post-author').textContent = `By ${post.author}`;
     document.getElementById('post-date').textContent = post.date;
-    document.getElementById('post-read-time').textContent = post.readingTime;
+    document.getElementById('post-read-time').textContent = post.readingTime || '5 min read';
     
     if (post.featuredImage) {
         document.getElementById('post-image').src = post.featuredImage;
         document.getElementById('post-image').alt = post.title;
+    } else {
+        document.getElementById('post-image').style.display = 'none';
     }
     
     // Render content
     const contentDiv = document.getElementById('post-body');
     let html = '';
     
-    post.content.forEach(block => {
-        switch(block.type) {
-            case 'paragraph':
-                html += `<p>${block.data}</p>`;
-                break;
-            case 'heading':
-                const tag = `h${block.level}`;
-                html += `<${tag}>${block.data}</${tag}>`;
-                break;
-            case 'list':
-                const listTag = block.style === 'ordered' ? 'ol' : 'ul';
-                html += `<${listTag}>`;
-                block.data.forEach(item => {
-                    html += `<li>${item}</li>`;
-                });
-                html += `</${listTag}>`;
-                break;
-        }
-    });
+    if (post.content && Array.isArray(post.content)) {
+        post.content.forEach(block => {
+            switch(block.type) {
+                case 'paragraph':
+                    html += `<p>${block.data}</p>`;
+                    break;
+                case 'heading':
+                    const tag = `h${block.level}`;
+                    html += `<${tag}>${block.data}</${tag}>`;
+                    break;
+                case 'list':
+                    const listTag = block.style === 'ordered' ? 'ol' : 'ul';
+                    html += `<${listTag}>`;
+                    block.data.forEach(item => {
+                        html += `<li>${item}</li>`;
+                    });
+                    html += `</${listTag}>`;
+                    break;
+                case 'quote':
+                    html += `<blockquote>${block.data}</blockquote>`;
+                    break;
+                default:
+                    html += `<p>${block.data}</p>`;
+            }
+        });
+    } else {
+        html = '<p>Content not available.</p>';
+    }
     
     contentDiv.innerHTML = html;
 }
