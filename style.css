@@ -1,14 +1,21 @@
-body {
+/* Reset & Base Styles */
+* {
   margin: 0;
-  font-family: 'Inter', sans-serif;
-  background-color: #f9f9f9;
-  color: #1a1a1a;
-  line-height: 1.6;
+  padding: 0;
+  box-sizing: border-box;
 }
 
+body {
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+  background-color: #f4f6f8;
+  color: #1a1a1a;
+  line-height: 1.7;
+}
+
+/* Header */
 header {
   background-color: #2563eb;
-  color: white;
+  color: #fff;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -16,10 +23,11 @@ header {
   position: sticky;
   top: 0;
   z-index: 1000;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 
 header .logo {
-  font-weight: bold;
+  font-weight: 700;
   font-size: 28px;
 }
 
@@ -30,67 +38,123 @@ header nav ul {
 }
 
 header nav ul li a {
-  color: white;
+  color: #fff;
   text-decoration: none;
   font-weight: 500;
+  padding: 5px 10px;
+  transition: background 0.3s, border-radius 0.3s;
 }
 
+header nav ul li a:hover,
 header nav ul li a.active {
-  text-decoration: underline;
+  background-color: #1d4ed8;
+  border-radius: 6px;
 }
 
-.hero {
-  text-align: center;
-  padding: 60px 20px;
-  background-color: #e0f0ff;
+/* Main Layout */
+main {
+  max-width: 1200px;
+  margin: 50px auto;
+  padding: 0 20px;
 }
 
-.hero h1 {
-  font-size: 36px;
-  margin-bottom: 20px;
-}
-
-.hero p {
-  font-size: 18px;
-}
-
+/* Posts Grid */
 .posts-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 25px;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 30px;
   margin-top: 30px;
 }
 
+/* Post Cards */
 .post-card {
-  background: white;
+  background-color: #fff;
   padding: 25px;
-  border-radius: 8px;
-  box-shadow: 0 6px 12px rgba(0,0,0,0.08);
-  transition: transform 0.2s ease;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .post-card:hover {
   transform: translateY(-5px);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.12);
 }
 
 .post-card h3 {
-  margin-top: 0;
   font-size: 20px;
+  margin-bottom: 12px;
+  color: #111827;
+}
+
+.post-card h3 a {
+  color: inherit;
+  text-decoration: none;
 }
 
 .post-card p {
   font-size: 15px;
-  color: #333;
+  color: #374151;
 }
 
+/* Blog Article Styles */
+main h1 {
+  font-size: 34px;
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+
+main h2 {
+  font-size: 24px;
+  margin: 25px 0 15px;
+  color: #111827;
+}
+
+main p {
+  font-size: 16px;
+  margin-bottom: 15px;
+  color: #4b5563;
+}
+
+main ul {
+  list-style: disc inside;
+  margin: 15px 0;
+}
+
+main ul li {
+  margin-bottom: 10px;
+}
+
+/* Footer */
 footer {
-  background-color: #1a1a1a;
-  color: white;
+  background-color: #111827;
+  color: #fff;
   text-align: center;
-  padding: 25px;
+  padding: 25px 20px;
+  font-size: 14px;
 }
 
 footer a {
   color: #2563eb;
   text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+  header {
+    flex-direction: column;
+    gap: 10px;
+    padding: 15px 20px;
+  }
+
+  .posts-container {
+    grid-template-columns: 1fr;
+  }
+
+  main {
+    padding: 20px;
+  }
 }
