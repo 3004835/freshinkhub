@@ -1,0 +1,113 @@
+{
+  "posts": [
+    {
+      "id": "ai-content-2026",
+      "title": "How AI is Transforming Content Creation in 2026",
+      "slug": "ai-content-creation-2026",
+      "date": "March 1, 2026",
+      "author": "Sarah Chen",
+      "excerpt": "Discover how artificial intelligence is revolutionizing the way we create, optimize, and distribute content at scale.",
+      "featuredImage": "/images/ai-blog.jpg",
+      "featured": true,
+      "content": [
+        {
+          "type": "paragraph",
+          "data": "Artificial intelligence has moved from being a buzzword to an essential tool for modern content creators. In 2026, we're seeing AI not just as a helper, but as a collaborative partner in the creative process [citation:2]."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "data": "Beyond Simple Generation"
+        },
+        {
+          "type": "paragraph",
+          "data": "Modern AI tools can now handle the entire content lifecycle: from ideation and research to distribution and performance analysis. This shift allows creators to focus on strategy and emotional connection while AI handles the heavy lifting [citation:9]."
+        },
+        {
+          "type": "list",
+          "style": "unordered",
+          "data": [
+            "AI-powered topic research that identifies content gaps",
+            "Automated content briefs with SEO optimization",
+            "Real-time performance tracking and recommendations",
+            "Personalized content variations for different audience segments"
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "data": "The Human Element"
+        },
+        {
+          "type": "paragraph",
+          "data": "While AI excels at data processing and pattern recognition, human creativity remains irreplaceable for storytelling and authentic connection. The winning strategy combines AI efficiency with human insight [citation:4]."
+        }
+      ],
+      "categories": ["AI", "Content Strategy"],
+      "readingTime": "5 min read"
+    },
+    {
+      "id": "web-hosting-tips",
+      "title": "Web Hosting Performance: What Really Matters in 2026",
+      "slug": "web-hosting-performance-2026",
+      "date": "February 15, 2026",
+      "author": "Michael Roberts",
+      "excerpt": "Server response times, CDN configurations, and caching strategies that actually move the needle for your site speed.",
+      "featuredImage": "/images/hosting.jpg",
+      "featured": true,
+      "content": [
+        {
+          "type": "paragraph",
+          "data": "With Core Web Vitals now being a major ranking factor, understanding the technical aspects of web hosting has never been more critical for business success [citation:3]."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "data": "Beyond the 99.9% Uptime Myth"
+        },
+        {
+          "type": "paragraph",
+          "data": "Many providers advertise 99.9% uptime, but that still allows for nearly 9 hours of downtime per year. For e-commerce sites, this can mean significant revenue loss. Look for providers offering at least 99.95% SLAs [citation:3]."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "data": "The Real Performance Killers"
+        },
+        {
+          "type": "paragraph",
+          "data": "Time to First Byte (TTFB) often gets overlooked. Even with optimized images and code, a slow server response will kill your user experience. Modern hosting requires proper CDN integration and server-level caching [citation:10]."
+        }
+      ],
+      "categories": ["Web Hosting", "Performance"],
+      "readingTime": "7 min read"
+    },
+    {
+      "id": "digital-business-trends",
+      "title": "Digital Business Trends That Will Define the Next Decade",
+      "slug": "digital-business-trends-2026",
+      "date": "February 1, 2026",
+      "author": "Alex Rivera",
+      "excerpt": "From decentralized operations to AI-driven customer experiences, here's what forward-thinking entrepreneurs need to know.",
+      "featuredImage": "/images/digital-business.jpg",
+      "featured": false,
+      "content": [
+        {
+          "type": "paragraph",
+          "data": "The digital business landscape is evolving faster than ever. Companies that adapt to these emerging trends will thrive, while those that resist risk becoming obsolete [citation:4]."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "data": "The Rise of AI-First Operations"
+        },
+        {
+          "type": "paragraph",
+          "data": "Businesses are moving beyond using AI as a tool and are now restructuring entire operations around AI capabilities. This includes automated customer service, predictive inventory management, and AI-driven content personalization [citation:6]."
+        }
+      ],
+      "categories": ["Business", "Trends"],
+      "readingTime": "6 min read"
+    }
+  ]
+}
